@@ -225,12 +225,12 @@ func fromStructType(pt *types.StructType) dgo.Type {
 		return typ.Map
 	}
 	pes := pt.Elements()
-	ds := make([]dgo.StructEntry, len(pes))
+	ds := make([]dgo.StructMapEntry, len(pes))
 	for i := range pes {
 		pe := pes[i]
-		ds[i] = newtype.StructEntry(pe.Name(), fromType(pe.Value()), !pe.Optional())
+		ds[i] = newtype.StructMapEntry(pe.Name(), fromType(pe.Value()), !pe.Optional())
 	}
-	return newtype.Struct(false, ds...)
+	return newtype.StructMap(false, ds...)
 }
 
 func fromTimestampType(pt *types.TimestampType) dgo.Type {

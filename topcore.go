@@ -79,13 +79,13 @@ func toType(t dgo.Type) (pt px.Type) {
 	panic(fmt.Errorf(`unable to create pcore Type from a '%s'`, t))
 }
 
-func toStruct(st dgo.StructType) px.Type {
+func toStruct(st dgo.StructMapType) px.Type {
 	if st.Additional() {
 		panic(errors.New(`unable to create pcore Struct that allows additional entries`))
 	}
 	es := make([]*types.StructElement, st.Len())
 	i := 0
-	st.Each(func(e dgo.StructEntry) {
+	st.Each(func(e dgo.StructMapEntry) {
 		kt := toType(e.Key().(dgo.Type))
 		if !e.Required() {
 			kt = types.NewOptionalType(kt)
@@ -187,7 +187,7 @@ func init() {
 			return toMap(t.(dgo.ExactType).Value().(dgo.Map)).PType()
 		},
 		dgo.TiStruct: func(t dgo.Type) px.Type {
-			return toStruct(t.(dgo.StructType))
+			return toStruct(t.(dgo.StructMapType))
 		},
 		dgo.TiBinary: func(t dgo.Type) px.Type {
 			return types.DefaultBinaryType()

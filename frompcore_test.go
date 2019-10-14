@@ -139,7 +139,7 @@ func TestFromPcore_sensitiveType(t *testing.T) {
 func TestFromPcore_structType(t *testing.T) {
 	require.Equal(t, typ.Map, dgopcore.FromPcore(types.DefaultStructType()))
 	require.Equal(t,
-		newtype.StructFromMap(false, vf.Map(`a`, typ.Float, `b`, vf.Map(`type`, typ.Integer, `required`, true))),
+		newtype.StructMapFromMap(false, vf.Map(`a`, typ.Float, `b`, vf.Map(`type`, typ.Integer, `required`, true))),
 		dgopcore.FromPcore(types.NewStructType(
 			[]*types.StructElement{
 				types.NewStructElement(types.NewOptionalType(types.WrapString(`a`).PType()), types.DefaultFloatType()),

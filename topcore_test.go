@@ -172,10 +172,10 @@ func TestToPcore_structType(t *testing.T) {
 			[]*types.StructElement{
 				types.NewStructElement(types.NewOptionalType(types.WrapString(`a`).PType()), types.DefaultFloatType()),
 				types.NewStructElement(types.WrapString(`b`), types.DefaultIntegerType())}),
-		dgopcore.ToPcore(newtype.StructFromMap(false, vf.Map(`a`, typ.Float, `b`, vf.Map(`type`, typ.Integer, `required`, true)))))
+		dgopcore.ToPcore(newtype.StructMapFromMap(false, vf.Map(`a`, typ.Float, `b`, vf.Map(`type`, typ.Integer, `required`, true)))))
 
 	require.Panic(t, func() {
-		dgopcore.ToPcore(newtype.StructFromMap(true, vf.Map(`a`, typ.Float)))
+		dgopcore.ToPcore(newtype.StructMapFromMap(true, vf.Map(`a`, typ.Float)))
 	}, `unable to create pcore Struct that allows additional entries`)
 }
 
